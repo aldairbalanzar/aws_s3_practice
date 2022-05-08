@@ -8,6 +8,8 @@ fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 boto3 = "*"
 python-dotenv = "*"
+python-multipart = "*"
+content-size-limit-asgi = "*"
 
 [dev-packages]
 
