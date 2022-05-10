@@ -6,7 +6,6 @@ from utils.security import validate_file_size, validate_file_type
 from PIL import Image
 from io import BytesIO
 
-
 app = FastAPI()
 print('\t>>> API is runnning...')
 
@@ -28,12 +27,13 @@ async def add_files(files: List[UploadFile] = File(...)):
 
     print('\t>>> adding file(s)...')
     for file in files:
-        image = BytesIO()
-        img = file
-        img.save(image)
-        image.seek(0)
+        data = await file.read()
+        file_copy = NamedTemporaryFile(delete=False)
+
+        file_copy.write(data)
+        file_copy.seek(0)
         
-        s3.resource.Bucket(s3.aws_bucket).put_object(Body=upload_img, Key=f'images/{file.filename}',  ContentType=file.content_type)
+        s3.resource.Bucket(s3.aws_bucket).put_object(Body=data, Key=f'images/{file.filename}',  ContentType=file.content_type)
         # s3.resource.Bucket(s3.aws_bucket).upload_file(file.filename, f'images/{file.filename}', ExtraArgs={'ContentType': file.content_type})
 
 
