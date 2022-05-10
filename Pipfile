@@ -10,6 +10,7 @@ boto3 = "*"
 python-dotenv = "*"
 python-multipart = "*"
 content-size-limit-asgi = "*"
+pillow = "*"
 
 [dev-packages]
 

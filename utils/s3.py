@@ -14,6 +14,6 @@ class S3:
         )
         self.resource = self.session.resource('s3')
         self.client = self.session.client('s3')
-        print('\t>>> S3 is running...')
+        print('\t>>> S3 is up.')
 
 s3 = S3()
