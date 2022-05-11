@@ -4,10 +4,7 @@ from typing import List
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from utils.s3 import s3
 from utils.security import validate_file_size, validate_file_type
-from PIL import Image
-from io import BytesIO
-import os
-import boto3
+
 
 app = FastAPI()
 print('\t>>> API is runnning...')
@@ -17,7 +14,7 @@ def read_root():
     print('\t>>> getting "/" route...')
     return {"greeting": "waddup"}
 
-@app.post('/photo')
+@app.post('/add_photo')
 def add_file(file: UploadFile):
     s3.resource.Bucket(s3.aws_bucket).upload_fileobj(file.file,
                                                     f'images/{file.filename}',
@@ -28,6 +25,20 @@ def add_file(file: UploadFile):
             'message': 'file successfuly uploaded',
             'image_url': img_url
             }
+
+@app.post('/add_multiple_photos')
+def add_files(files: List[UploadFile]):
+    img_url_list = []
+    for file in files:
+        s3.resource.Bucket(s3.aws_bucket).upload_fileobj(file.file,
+                                                        f'images/{file.filename}',
+                                                        ExtraArgs={'ContentType': file.content_type})
+        img_url_list.append(f'https://{s3.aws_bucket}.s3.amazonaws.com/images/{file.filename}')
+        
+    return {
+        'message': 'file(s) successfuly uploaded',
+        'image_url': img_url_list
+        }
 
 # @app.post('/')
 # async def add_files(files: List[UploadFile] = File(...)):
