@@ -12,7 +12,6 @@ def validate_file_size(file: UploadFile = File(...)):
     return True
 
 def validate_file_type(file: UploadFile = File(...)):
-    print(f'type: {file.content_type}')
     if file.content_type == 'image/png' or file.content_type == 'image/jpeg':
         return True
 
