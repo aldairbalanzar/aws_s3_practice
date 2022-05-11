@@ -1,6 +1,7 @@
 from fastapi import File, UploadFile, HTTPException
 
-def validate_file_size(file: UploadFile = File(...)):
+async def validate_file_size(file: UploadFile = File(...)):
+    # For some reason this breaks the file before reaching the S3 upload method by setting it to 0
     limit=2_000_000
     file_size = 0
     for chunk in file:
