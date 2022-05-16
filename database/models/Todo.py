@@ -12,6 +12,6 @@ class Todo(Timestamp, Base):
     task = Column(String(50), nullable=False)
     details = Column(Text, nullable=True)
     is_done = Column(Boolean, default=False)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
 
     owner = relationship('User', back_populates='todo')

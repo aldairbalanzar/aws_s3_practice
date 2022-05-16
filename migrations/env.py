@@ -45,8 +45,8 @@ def run_migrations_offline():
     script output.
 
     """
-    url = config.get_main_option("sqlalchemy.url",
-    f'postgresql+psycopg2://{db_user}:{db_pw}@localhost/{db_name}')
+    url = config.get_main_option("sqlalchemy.url")
+    print(f'\t>>> url: {url}')
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -65,8 +65,10 @@ def run_migrations_online():
     and associate a connection with the context.
 
     """
+    alembic_config = config.get_section(config.config_ini_section)
+    alembic_config['sqlalchemy.url'] = f'postgresql+psycopg2://{db_user}:{db_pw}@localhost:5432/{db_name}'
     connectable = engine_from_config(
-        config.get_section(config.config_ini_section),
+        alembic_config,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
