@@ -5,7 +5,11 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from utils.s3 import s3
 from utils.security import validate_file_size, validate_file_type
 from content_size_limit_asgi import ContentSizeLimitMiddleware
+from database.db_config import engine
+from database.models import User, Todo
 
+User.Base.metadata.create_all(bind=engine)
+Todo.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 print('\t>>> API is runnning...')

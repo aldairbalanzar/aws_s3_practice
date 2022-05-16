@@ -13,6 +13,7 @@ content-size-limit-asgi = "*"
 pillow = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
+alembic = "*"
 
 [dev-packages]
 

@@ -12,7 +12,7 @@ db_pw = os.environ['DB_PW']
 db_name = os.environ['DB_NAME']
 
 engine = create_engine(
-    f'postgresql+psycopg2://{db_user}:{db_pw}@localhost/{db_name}',
+    f'postgresql+psycopg2://{db_user}:{db_pw}@localhost:5432/{db_name}',
     connect_args={},
     future=True)
 
