@@ -1,0 +1,23 @@
+[
+    {
+        "name": "Oli",
+        "email": "user1email@email.com",
+        "role": 2,
+        "created_at": "2022-05-17 01:00:00-00",
+        "updated_at": "2022-05-17 01:00:00-00"
+    },
+    {
+        "name": "Jim",
+        "email": "user2email@email.com",
+        "role": 2,
+        "created_at": "2022-05-17 01:00:00-00",
+        "updated_at": "2022-05-17 01:00:00-00"
+    },
+    {
+        "name": "Ben",
+        "email": "user3email@email.com",
+        "role": 3,
+        "created_at": "2022-05-17 01:00:00-00",
+        "updated_at": "2022-05-17 01:00:00-00"
+    }
+]
